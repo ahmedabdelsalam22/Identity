@@ -21,6 +21,8 @@ builder.Services.Configure<IdentityOptions>(opts => {
 });
 
 builder.Services.AddTransient<IPasswordValidator<AppUser>, CustomPasswordPolicy>();
+builder.Services.AddTransient<IUserValidator<AppUser>, CustomUsernameEmailPolicy>();
+
 
 builder.Services.AddControllersWithViews();
 
