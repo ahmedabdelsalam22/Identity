@@ -15,7 +15,7 @@ namespace Identity.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(userManager.Users);
         }
 
         public ViewResult Create()
@@ -38,7 +38,8 @@ namespace Identity.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                else {
+                else 
+                {
                     foreach (IdentityError error in identityResult.Errors)
                         ModelState.AddModelError("", error.Description);
                 }
