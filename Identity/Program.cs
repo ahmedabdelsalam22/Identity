@@ -1,3 +1,4 @@
+using Identity.IdentityPolicy;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,13 @@ builder.Services.AddIdentity<AppUser,IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(opts => {
+    opts.User.RequireUniqueEmail = true;
+    opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
     opts.Password.RequiredLength = 8;
     opts.Password.RequireLowercase = true;
 });
+
+builder.Services.AddTransient<IPasswordValidator<AppUser>, CustomPasswordPolicy>();
 
 builder.Services.AddControllersWithViews();
 
